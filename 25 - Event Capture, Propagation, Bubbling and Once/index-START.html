@@ -40,8 +40,25 @@
   }
 </style>
 
-<button></button>
+<button class="btn">Click Me, but ONLY ONCE</button>
 <script>
+  const divs = document.querySelectorAll('div');
+  const button = document.querySelector('button');
+
+  function logText(e) {
+    console.log(this.classList.value);
+    // e.stopPropagation(); // stop bubbling
+    // console.log(this);
+  }
+
+  divs.forEach(div => div.addEventListener('click', logText, {
+    capture: false, // capture true sets it to run function "logText" from top to bottom instead
+    once: true // turns off eventListener so you can only click once
+  }));
+
+  button.addEventListener('click', logText, {
+    once: true
+  });
 
 </script>
 </body>
